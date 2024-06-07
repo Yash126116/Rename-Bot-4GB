@@ -9,25 +9,25 @@ async def upgrade(bot,update):
 	
 	**🪙 Basic** 
 	Daily  Upload  limit 20GB
-	Price Rs 49  ind /🌎 0.59$  per Month
+	Pric 🌎 0.5$  per Month
 	
 	**⚡ Standard**
 	Daily Upload limit 50GB
-	Price Rs 99  ind /🌎 1.19$  per Month
+	Price 🌎 1$  per Month
 	
 	**💎 Pro**
 	Daily Upload limit 100GB
-	Price Rs 179  ind /🌎 2.16$  per Month
+	Price 🌎 1.5$  per Month
 	
 	
-	Pay Using Upi I'd `madflixofficial@axl`
+	Pay Using Binance Pay I'd `185823678`
 	
 	After Payment Send Screenshots Of 
-        Payment To Admin @calladminrobot"""
+        Payment To Admin @Cashscopebot"""
 	keybord = InlineKeyboardMarkup([[ 
-        			InlineKeyboardButton("Admin",url = "https://t.me/calladminrobot")], 
-        			[InlineKeyboardButton("Phone Pay",url = "https://telegra.ph/file/7f959437f9375b313ed1c.jpg"),
-        			InlineKeyboardButton("Paytm Wallet/UPI",url = "https://telegra.ph/file/30b3e45a02766803883cb.jpg")],[InlineKeyboardButton("Cancel",callback_data = "cancel")  ]])
+        			InlineKeyboardButton("Admin",url = "https://t.me/Cashscopebot")], 
+        			[InlineKeyboardButton("Phone Pay",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg"),
+        			InlineKeyboardButton("Paytm Wallet/UPI",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg")],[InlineKeyboardButton("Cancel",callback_data = "cancel")  ]])
 	await update.message.edit(text = text,reply_markup = keybord)
 	
 
@@ -39,35 +39,23 @@ async def upgradecm(bot,message):
 	
 	**🪙 Basic** 
 	Daily  Upload  limit 20GB
-	Price Rs 49  ind /🌎 0.59$  per Month
+	Price 🌎 0.5$  per Month
 	
 	**⚡ Standard**
 	Daily Upload limit 50GB
-	Price Rs 99  ind /🌎 1.19$  per Month
+	Price 🌎 1$  per Month
 	
 	**💎 Pro**
 	Daily Upload limit 100GB
-	Price Rs 179  ind /🌎 2.16$  per Month
+	Price 🌎 1.5$  per Month
 	
 	
-	Pay Using Upi I'd `madflixofficial@axl`
+	Pay Using Binance Pay I'd `185823678`
 	
 	After Payment Send Screenshots Of 
-        Payment To Admin @calladminrobot"""
+        Payment To Admin @Cashscopebot"""
 	keybord = InlineKeyboardMarkup([[ 
-        			InlineKeyboardButton("Admin",url = "https://t.me/calladminrobot")], 
-        			[InlineKeyboardButton("Phone Pay",url = "https://telegra.ph/file/7f959437f9375b313ed1c.jpg"),
-        			InlineKeyboardButton("Paytm Wallet/UPI",url = "https://telegra.ph/file/30b3e45a02766803883cb.jpg")],[InlineKeyboardButton("Cancel",callback_data = "cancel")  ]])
-	await message.reply_text(text = text,reply_markup = keybord)
-
-
-
-
-
-
-
-
-# Jishu Developer 
-# Don't Remove Credit 🥺
-# Telegram Channel @Madflix_Bots
-# Developer @JishuDeveloper
+        			InlineKeyboardButton("Admin",url = "https://t.me/Cashscopebot")], 
+        			[InlineKeyboardButton("Phone Pay",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg"),
+        			InlineKeyboardButton("Paytm Wallet/UPI",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg")],[InlineKeyboardButton("Cancel",callback_data = "cancel")  ]])
+	await update.message.edit(text = text,reply_markup = keybord)
