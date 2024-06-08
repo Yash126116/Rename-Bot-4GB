@@ -1,13 +1,14 @@
 from datetime import date as date_
 import datetime
-import os, re
+import os
+import re
 import asyncio
 import random
 from script import *
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 import time
-from pyrogram import Client, filters, enums
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import humanize
 from helper.progress import humanbytes
 from helper.database import botdata, find_one, total_user
@@ -104,28 +105,3 @@ async def send_doc(client, message):
     await message.reply_text(f"""__What Do You Want Me To Do With This File?__\n\n**File Name** :- `{filename}`\n**File Size** :- {filesize}\n**DC ID** :- {dcid}""", reply_to_message_id=message.id, reply_markup=InlineKeyboardMarkup(
         [[InlineKeyboardButton("📝 Rename", callback_data="rename"),
           InlineKeyboardButton("✖️ Cancel", callback_data="cancel")]]))
-                    total_rename(int(botid), prrename)
-                    total_size(int(botid), prsize, file.file_size)
-                else:
-                    uploadlimit(message.from_user.id, 2147483648)
-                    usertype(message.from_user.id, "Free")
-
-                    await message.reply_text(f'Yᴏᴜʀ Pʟᴀɴ Exᴘɪʀᴇᴅ Oɴ {buy_date}', quote=True)
-                    return
-            else:
-                await message.reply_text("Yᴏᴜ Cᴀɴ'ᴛ Uᴘʟᴏᴀᴅ Mᴏʀᴇ Tʜᴀɴ 2GB Fɪʟᴇ\n\nYᴏᴜʀ Pʟᴀɴ Dᴏᴇsɴ'ᴛ Aʟʟᴏᴡ Tᴏ Uᴘʟᴏᴀᴅ Fɪʟᴇs Tʜᴀᴛ Aʀᴇ Lᴀʀɢᴇʀ Tʜᴀɴ 2GB\n\nUpgrade Yᴏᴜʀ Pʟᴀɴ Tᴏ Rᴇɴᴀᴍᴇ Fɪʟᴇs Lᴀʀɢᴇʀ Tʜᴀɴ 2GB")
-                return
-        else:
-            if buy_date:
-                pre_check = check_expi(buy_date)
-                if pre_check == False:
-                    uploadlimit(message.from_user.id, 2147483648)
-                    usertype(message.from_user.id, "Free")
-
-            filesize = humanize.naturalsize(file.file_size)
-            fileid = file.file_id
-            total_rename(int(botid), prrename)
-            total_size(int(botid), prsize, file.file_size)
-            await message.reply_text(f"""__Wʜᴀᴛ Dᴏ Yᴏᴜ Wᴀɴᴛ Mᴇ Tᴏ Dᴏ Wɪᴛʜ Tʜɪs Fɪʟᴇ ?__\n\n**Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`\n**Fɪʟᴇ Sɪᴢᴇ** :- {filesize}\n**DC ID** :- {dcid}""", reply_to_message_id=message.id, reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("📝 Rᴇɴᴀᴍᴇ", callback_data="rename"),
-                  InlineKeyboardButton("✖️ Cᴀɴᴄᴇʟ", callback_data="cancel")]]))
