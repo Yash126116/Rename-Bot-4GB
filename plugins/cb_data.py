@@ -117,16 +117,31 @@ async def doc(bot, update):
             except:
                 return
     else:
-        await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
+        await ms.edit("`Trying to upload...`")
         c_time = time.time()
         try:
-            await bot.send_document(update.from_user.id, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
+        # First, send the video to the log_channel
+            filw = await bot.send_document(
+                log_channel, 
+                document=file_path, 
+                thumb=ph_path, 
+                duration=duration, 
+                caption=caption, 
+                progress=progress_for_pyrogram, 
+                progress_args=("`Trying to upload...`", ms, c_time)
+            )
+
+            from_chat = filw.chat.id  # Fix: use log_message to get chat id
+            mg_id = filw.id   # Fix: use log_message to get message id
+            time.sleep(2)
+            await bot.copy_message(update.from_user.id, from_chat, mg_id)
+
             await ms.delete()
             os.remove(file_path)
         except Exception as e:
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
-            await ms.edit(e)
+            await ms.edit(str(e))
             os.remove(file_path)
             return
 
