@@ -70,23 +70,23 @@ async def send_doc(client, message):
     prrename = bot_data['total_rename']
     prsize = bot_data['total_size']
     user_deta = find_one(user_id)
-    used_date = user_deta["date"]
     buy_date = user_deta["prexdate"]
-    daily = user_deta["daily"]
     user_type = user_deta["usertype"]
 
-    c_time = time.time()
-
+    # Check if user is on a free plan
     if user_type == "Free":
-        LIMIT = None
+        LIMIT = None  # Set LIMIT to None for free users
     else:
-        LIMIT = 10
-    then = used_date + LIMIT
-    left = round(then - c_time)
-    conversion = datetime.timedelta(seconds=left)
-    ltime = str(conversion)
-    if left > 0:
-        await message.reply_text(f"<b>Sorry Dude I Am Not Only For You \n\nFlood Control Is Active So Please Wait For {ltime} </b>", reply_to_message_id=message.id)
+        LIMIT = 120  # Set the time limit for other users
+
+    # Handle the case where LIMIT is None
+    if LIMIT is not None:
+        then = used_date + LIMIT
+        left = round(then - time.time())
+        conversion = datetime.timedelta(seconds=left)
+        ltime = str(conversion)
+        if left > 0:
+            await message.reply_text(f"<b>Sorry Dude I Am Not Only For You \n\nFlood Control Is Active So Please Wait For {ltime} </b>", reply_to_message_id=message.id)
     else:
         # Forward a single message
         media = await client.get_messages(message.chat.id, message.id)
