@@ -223,7 +223,7 @@ async def vid(bot, update):
         c_time = time.time()
         try:
         # First, send the video to the log_channel
-            log_message = await bot.send_video(
+            filw = await bot.send_video(
                 log_channel, 
                 video=file_path, 
                 thumb=ph_path, 
@@ -233,8 +233,8 @@ async def vid(bot, update):
                 progress_args=("`Trying to upload...`", ms, c_time)
             )
 
-            from_chat = log_message.chat.id  # Fix: use log_message to get chat id
-            mg_id = log_message.message_id   # Fix: use log_message to get message id
+            from_chat = filw.chat.id  # Fix: use log_message to get chat id
+            mg_id = filw.id   # Fix: use log_message to get message id
             time.sleep(2)
             await bot.copy_message(update.from_user.id, from_chat, mg_id)
 
