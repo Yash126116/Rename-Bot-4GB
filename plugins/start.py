@@ -143,7 +143,7 @@ async def send_doc(client, message):
         total_size(int(botid), prsize, file.file_size)
         await message.reply_text(f"""What Do You Want Me To Do With This File?\n\n**File Name**: `{filename}`\n**File Size**: {filesize}\n**DC ID**: {dcid}""", reply_to_message_id=message.id, reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("📝 Rename", callback_data="rename"),
-              InlineKeyboardButton("✖️ Cancel", callback_data="cancel"]))
+              InlineKeyboardButton("✖️ Cancel", callback_data="cancel")]]
 
 @Client.on_callback_query(filters.regex('^rename$'))
 async def rename_file(client, callback_query):
