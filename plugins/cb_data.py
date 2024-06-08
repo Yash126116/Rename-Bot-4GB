@@ -96,39 +96,48 @@ async def doc(bot, update):
     if value < file.file_size:
         await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
         try:
-            filw = await app.send_document(log_channel, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
-            from_chat = filw.chat.id
-            mg_id = filw.id
-            time.sleep(2)
-            await bot.copy_message(update.from_user.id, from_chat, mg_id)
-            await ms.delete()
-            os.remove(file_path)
-            try:
-                os.remove(ph_path)
-            except:
-                pass
-        except Exception as e:
-            neg_used = used - int(file.file_size)
-            used_limit(update.from_user.id, neg_used)
-            await ms.edit(e)
-            os.remove(file_path)
-            try:
-                os.remove(ph_path)
-            except:
-                return
-    else:
-        await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
-        c_time = time.time()
-        try:
-            await bot.send_document(update.from_user.id, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
-            await ms.delete()
-            os.remove(file_path)
-        except Exception as e:
-            neg_used = used - int(file.file_size)
-            used_limit(update.from_user.id, neg_used)
-            await ms.edit(e)
-            os.remove(file_path)
-            return
+            filw = await # For app.send_document
+await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
+try:
+    filw = await
+app.send_document(log_channel, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
+    from_chat = filw.chat.id
+    mg_id = filw.id
+    time.sleep(2)
+    await bot.copy_message(update.from_user.id, from_chat, mg_id)
+    await ms.delete()
+    os.remove(file_path)
+    try:
+        os.remove(ph_path)
+    except:
+        pass
+except Exception as e:
+    neg_used = used - int(file.file_size)
+    used_limit(update.from_user.id, neg_used)
+    await ms.edit(e)
+    os.remove(file_path)
+    try:
+        os.remove(ph_path)
+    except:
+        return
+
+# For bot.send_document
+else:
+    await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
+    c_time = time.time()
+    try:
+        # First, send to log_channel
+        await bot.send_document(log_channel, document=file_path, thumb=ph_path, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
+        # Then, copy to the user
+        await bot.copy_message(update.from_user.id, log_channel, filw.id)
+        await ms.delete()
+        os.remove(file_path)
+    except Exception as e:
+        neg_used = used - int(file.file_size)
+        used_limit(update.from_user.id, neg_used)
+        await ms.edit(e)
+        os.remove(file_path)
+        return
 
 
 @Client.on_callback_query(filters.regex("vid"))
