@@ -236,7 +236,7 @@ async def vid(bot, update):
             # Copy the message from log_channel to the user
             await bot.copy_message(
                 chat_id=update.from_user.id, 
-                from_chat_id=log_channel, 
+                from_chat_id=log_message.chat.id, 
                 message_id=log_message.message_id
             )
             
