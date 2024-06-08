@@ -32,18 +32,18 @@ async def start(client, message):
     except IndexError:
         id = None
 
-    loading_sticker_message = await message.reply_sticker("CAACAgIAAxkBAALmzGXSSt3ppnOsSl_spnAP8wHC26jpAAJEGQACCOHZSVKp6_XqghKoHgQ")
+    loading_sticker_message = await message.reply_sticker("CAACAgUAAxkBAAJdZGZjDMwa5Zris5EEemDOnAL1oHa2AAKtCgACa94QV683SZl-OU9gNQQ")
     await asyncio.sleep(2)
     await loading_sticker_message.delete()
-    txt=f"""Hello {message.from_user.mention} \n\n➻ This Is An Advanced And Yet Powerful Rename Bot.\n\n➻ Using This Bot You Can Rename And Change Thumbnail Of Your Files.\n\n➻ You Can Also Convert Video To File Aɴᴅ File To Video.\n\n➻ This Bot Also Supports Custom Thumbnail And Custom Caption.\n\n<b>Bot Is Made By @Madflix_Bots</b>"""
+    txt=f"""Hello {message.from_user.mention} \n\n➻ This Is An Advanced And Yet Powerful Rename Bot.\n\n➻ Using This Bot You Can Rename And Change Thumbnail Of Your Files.\n\n➻ You Can Also Convert Video To File Aɴᴅ File To Video.\n\n➻ This Bot Also Supports Custom Thumbnail And Custom Caption.\n\n<b>Bot Is Made By @Cs_Bots</b>"""
     await message.reply_photo(photo=BOT_PIC,
                                 caption=txt,
                                 reply_markup=InlineKeyboardMarkup(
-                                        [[InlineKeyboardButton("📢 Updates", url="https://t.me/Madflix_Bots"),
-                                        InlineKeyboardButton("💬 Support", url="https://t.me/MadflixBots_Support")],
+                                        [[InlineKeyboardButton("📢 Updates", url="https://t.me/Cs_Bots"),
+                                        InlineKeyboardButton("💬 Support", url="https://t.me/+-LAXtYnqhO1mY2U9")],
                                         [InlineKeyboardButton("🛠️ Help", callback_data='help'),
                                                         InlineKeyboardButton("❤️‍🩹 About", callback_data='about')],
-                                        [InlineKeyboardButton("🧑‍💻 Developer 🧑‍💻", url="https://t.me/CallAdminRobot")]
+                                        [InlineKeyboardButton("🧑‍💻 Developer 🧑‍💻", url="https://t.me/Cashscopebot")]
                                         ]))
     return
 
@@ -70,23 +70,23 @@ async def send_doc(client, message):
     prrename = bot_data['total_rename']
     prsize = bot_data['total_size']
     user_deta = find_one(user_id)
+    used_date = user_deta["date"]
     buy_date = user_deta["prexdate"]
+    daily = user_deta["daily"]
     user_type = user_deta["usertype"]
 
-    # Check if user is on a free plan
-    if user_type == "Free":
-        LIMIT = None  # Set LIMIT to None for free users
-    else:
-        LIMIT = 120  # Set the time limit for other users
+    c_time = time.time()
 
-    # Handle the case where LIMIT is None
-    if LIMIT is not None:
-        then = used_date + LIMIT
-        left = round(then - time.time())
-        conversion = datetime.timedelta(seconds=left)
-        ltime = str(conversion)
-        if left > 0:
-            await message.reply_text(f"<b>Sorry Dude I Am Not Only For You \n\nFlood Control Is Active So Please Wait For {ltime} </b>", reply_to_message_id=message.id)
+    if user_type == "Free":
+        LIMIT = 5
+    else:
+        LIMIT = 10
+    then = used_date + LIMIT
+    left = round(then - c_time)
+    conversion = datetime.timedelta(seconds=left)
+    ltime = str(conversion)
+    if left > 0:
+        await message.reply_text(f"<b>Sorry Dude I Am Not Only For You \n\nFlood Control Is Active So Please Wait For {ltime} </b>", reply_to_message_id=message.id)
     else:
         # Forward a single message
         media = await client.get_messages(message.chat.id, message.id)
