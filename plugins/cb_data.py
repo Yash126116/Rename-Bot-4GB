@@ -96,7 +96,8 @@ async def doc(bot, update):
     if value < file.file_size:
         await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
         try:
-            filw = await # For app.send_document
+            filw = await
+app.send_document
 await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
 try:
     filw = await
