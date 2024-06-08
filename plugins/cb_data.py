@@ -219,16 +219,33 @@ async def vid(bot, update):
             except:
                 return
     else:
-        await ms.edit("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ`")
+        await ms.edit("`Trying to upload...`")
         c_time = time.time()
         try:
-            await bot.send_video(update.from_user.id, video=file_path, thumb=ph_path, duration=duration, caption=caption, progress=progress_for_pyrogram, progress_args=("`Tʀyɪɴɢ Tᴏ Uᴘʟᴏᴀᴅɪɴɢ....`",  ms, c_time))
+            # First, send the video to the log_channel
+            log_message = await bot.send_video(
+                log_channel, 
+                video=file_path, 
+                thumb=ph_path, 
+                duration=duration, 
+                caption=caption, 
+                progress=progress_for_pyrogram, 
+                progress_args=("`Trying to upload...`", ms, c_time)
+            )
+            
+            # Copy the message from log_channel to the user
+            await bot.copy_message(
+                chat_id=update.from_user.id, 
+                from_chat_id=log_channel, 
+                message_id=log_message.message_id
+            )
+            
             await ms.delete()
             os.remove(file_path)
         except Exception as e:
             neg_used = used - int(file.file_size)
             used_limit(update.from_user.id, neg_used)
-            await ms.edit(e)
+            await ms.edit(str(e))
             os.remove(file_path)
             return
 
