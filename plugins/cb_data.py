@@ -219,33 +219,33 @@ async def vid(bot, update):
             except:
                 return
     else:
-        await ms.edit("`Trying to upload...`")
-        c_time = time.time()
-        try:
-            # First, send the video to the log_channel
-            log_message = await bot.send_video(
-                log_channel, 
-                video=file_path, 
-                thumb=ph_path, 
-                duration=duration, 
-                caption=caption, 
-                progress=progress_for_pyrogram, 
-                progress_args=("`Trying to upload...`", ms, c_time)
-            )
-            
-              from_chat = log_channel.chat.id
-            mg_id = log_channel.id
-            time.sleep(2)
-            await bot.copy_message(update.from_user.id, from_chat, mg_id)
-            
-            await ms.delete()
-            os.remove(file_path)
-        except Exception as e:
-            neg_used = used - int(file.file_size)
-            used_limit(update.from_user.id, neg_used)
-            await ms.edit(str(e))
-            os.remove(file_path)
-            return
+    await ms.edit("`Trying to upload...`")
+    c_time = time.time()
+    try:
+        # First, send the video to the log_channel
+        log_message = await bot.send_video(
+            log_channel, 
+            video=file_path, 
+            thumb=ph_path, 
+            duration=duration, 
+            caption=caption, 
+            progress=progress_for_pyrogram, 
+            progress_args=("`Trying to upload...`", ms, c_time)
+        )
+
+        from_chat = log_message.chat.id  # Fix: use log_message to get chat id
+        mg_id = log_message.message_id   # Fix: use log_message to get message id
+        time.sleep(2)
+        await bot.copy_message(update.from_user.id, from_chat, mg_id)
+
+        await ms.delete()
+        os.remove(file_path)
+    except Exception as e:
+        neg_used = used - int(file.file_size)
+        used_limit(update.from_user.id, neg_used)
+        await ms.edit(str(e))
+        os.remove(file_path)
+        return
 
 
 @Client.on_callback_query(filters.regex("aud"))
