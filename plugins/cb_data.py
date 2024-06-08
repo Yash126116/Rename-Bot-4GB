@@ -233,12 +233,10 @@ async def vid(bot, update):
                 progress_args=("`Trying to upload...`", ms, c_time)
             )
             
-            # Copy the message from log_channel to the user
-            await bot.copy_message(
-                chat_id=update.from_user.id, 
-                from_chat_id=log_message.chat.id, 
-                message_id=log_message.message_id
-            )
+              from_chat = log_channel.chat.id
+            mg_id = log_channel.id
+            time.sleep(2)
+            await bot.copy_message(update.from_user.id, from_chat, mg_id)
             
             await ms.delete()
             os.remove(file_path)
