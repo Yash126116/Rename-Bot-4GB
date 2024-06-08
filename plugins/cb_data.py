@@ -125,7 +125,6 @@ async def doc(bot, update):
                 log_channel, 
                 document=file_path, 
                 thumb=ph_path, 
-                duration=duration, 
                 caption=caption, 
                 progress=progress_for_pyrogram, 
                 progress_args=("`Trying to upload...`", ms, c_time)
