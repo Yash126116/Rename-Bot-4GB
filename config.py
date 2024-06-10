@@ -1,11 +1,5 @@
 import os
 
-logging.basicConfig(
-    format='%(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler('log.txt'),
-              logging.StreamHandler()],
-    level=logging.INFO
-)
 
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
