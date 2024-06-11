@@ -74,15 +74,6 @@ async def doc(bot, update):
     except:
         pass
     thumb = data[0]
-
-    # Check metadata settings
-    if get_metadata(update.from_user.id):
-        metadata_code = get_metadata_code(update.from_user.id)
-        if c_caption:
-            c_caption += f"\n\nMetadata Code: {metadata_code}"
-        else:
-            c_caption = f"Metadata Code: {metadata_code}"
-
     if c_caption:
         doc_list = ["filename", "filesize"]
         new_tex = escape_invalid_curly_brackets(c_caption, doc_list)
@@ -194,15 +185,6 @@ async def vid(bot, update):
     metadata = extractMetadata(createParser(file_path))
     if metadata.has("duration"):
         duration = metadata.get('duration').seconds
-
-    # Check metadata settings
-    if get_metadata(update.from_user.id):
-        metadata_code = get_metadata_code(update.from_user.id)
-        if c_caption:
-            c_caption += f"\n\nMetadata Code: {metadata_code}"
-        else:
-            c_caption = f"Metadata Code: {metadata_code}"
-
     if c_caption:
         vid_list = ["filename", "filesize", "duration"]
         new_tex = escape_invalid_curly_brackets(c_caption, vid_list)
@@ -254,7 +236,7 @@ async def vid(bot, update):
         await ms.edit("`Trying to upload...`")
         c_time = time.time()
         try:
-            # First, send the video to the log_channel
+        # First, send the video to the log_channel
             filw = await bot.send_video(
                 log_channel, 
                 video=file_path, 
@@ -313,15 +295,6 @@ async def aud(bot, update):
     data = find(user_id)
     c_caption = data[1]
     thumb = data[0]
-
-    # Check metadata settings
-    if get_metadata(update.from_user.id):
-        metadata_code = get_metadata_code(update.from_user.id)
-        if c_caption:
-            c_caption += f"\n\nMetadata Code: {metadata_code}"
-        else:
-            c_caption = f"Metadata Code: {metadata_code}"
-
     if c_caption:
         aud_list = ["filename", "filesize", "duration"]
         new_tex = escape_invalid_curly_brackets(c_caption, aud_list)
