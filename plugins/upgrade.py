@@ -11,7 +11,7 @@ async def upgrade(bot,update):
  Contact Admin To Activate You Free Trial
 	
 	**🪙 Basic** 
-	Daily  Upload  limit 10GB
+	Daily  Upload  limit 20GB
 	Price 🌎 0.5$  per Month
 	
 	**⚡ Standard**
@@ -25,8 +25,8 @@ async def upgrade(bot,update):
 	
 	Pay Using Binance Pay I'd `185823678`
 	
-	After Payment Send Screenshots Of 
-        Payment To Admin @Cashscopebot"""
+ After Payment Send Screenshots Of 
+ Payment To Admin @Cashscopebot"""
 	keybord = InlineKeyboardMarkup([[ 
         			InlineKeyboardButton("Admin",url = "https://t.me/Uaaaaaaa")], 
         			[InlineKeyboardButton("Phone Pay",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg"),
@@ -44,7 +44,7 @@ async def upgradecm(bot,message):
  Contact Admin To Activate You Free Trial
 	
 	**🪙 Basic** 
-	Daily  Upload  limit 10GB
+	Daily  Upload  limit 20GB
 	Price 🌎 0.5$  per Month
 	
 	**⚡ Standard**
@@ -59,7 +59,7 @@ async def upgradecm(bot,message):
 	Pay Using Binance Pay I'd `185823678`
 	
 	After Payment Send Screenshots Of 
-        Payment To Admin @Cashscopebot"""
+  Payment To Admin @Cashscopebot"""
 	keybord = InlineKeyboardMarkup([[ 
         			InlineKeyboardButton("Admin",url = "https://t.me/Uaaaaaaa")], 
         			[InlineKeyboardButton("Phone Pay",url = "https://graph.org/file/8193b7e8d969f8db28ab2.jpg"),
