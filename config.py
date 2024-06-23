@@ -17,8 +17,7 @@ DB_NAME = os.environ.get("DB_NAME", "madflixbotz")
 STRING = os.environ.get("STRING", "")
 BOT_PIC = os.environ.get("BOT_PIC", "https://graph.org/file/ad48ac09b1e6f30d2dae4.jpg")
 
-
-
+LINK_CHANNEL = int(os.getenv("LINK_CHANNEL", -1002148576683))  # Replace with your actual link channel ID
 
 
 # if you need to add verify system then dm me on telegram
@@ -34,8 +33,3 @@ BOT_PIC = os.environ.get("BOT_PIC", "https://graph.org/file/ad48ac09b1e6f30d2dae
 # TOKEN_TIMEOUT = os.environ.get("TOKEN_TIMEOUT", "")
 
 
-# Jishu Developer 
-# Don't Remove Credit 🥺
-# Telegram Channel @Madflix_Bots
-# Backup Channel @JishuBotz
-# Developer @JishuDeveloper
