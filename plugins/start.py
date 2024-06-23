@@ -109,8 +109,20 @@ async def send_doc(client, message):
         if remain < int(file.file_size):
             await message.reply_text(f"100% Of Daily {humanbytes(limit)} Data Quota Exhausted.\n\n<b>File Size Detected :</b> {humanbytes(file.file_size)}\n<b>Used Daily Limit :</b> {humanbytes(used)}\n\nYou Have Only <b>{humanbytes(remain)}</b> Left On Your Account.\n\nIf U Want To Rename Large File Upgrade Your Plan", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💫 Get Free Trial", callback_data="upgrade")]]))
             return
+        
+        # New logic for DC ID check
+        if dcid in [3, 4, 5]:
+            copy_message = await client.copy_message(
+                chat_id=link_channel,
+                from_chat_id=message.chat.id,
+                message_id=message.id,
+                caption=message.caption,
+                reply_markup=message.reply_markup
+            )
+            await message.reply_text(f"**File copied to link channel.**\n\n**DC ID:** {dcid}\n**File Name:** {filename}", reply_to_message_id=message.id)
+            return
+        
         if value < file.file_size:
-
             if STRING:
                 if buy_date == None:
                     await message.reply_text(f" Yᴏᴜ Cᴀɴ'ᴛ Uᴘʟᴏᴀᴅ Mᴏʀᴇ Tʜᴀɴ 2GB Fɪʟᴇ\n\nYᴏᴜʀ Pʟᴀɴ Dᴏᴇsɴ'ᴛ Aʟʟᴏᴡ Tᴏ Uᴘʟᴏᴀᴅ Fɪʟᴇs Tʜᴀᴛ Aʀᴇ Lᴀʀɢᴇʀ Tʜᴀɴ 2GB\n\nUpgrade Yᴏᴜʀ Pʟᴀɴ Tᴏ Rᴇɴᴀᴍᴇ Fɪʟᴇs Lᴀʀɢᴇʀ Tʜᴀɴ 2GB", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💫 Get Free Trial", callback_data="upgrade")]]))
@@ -140,6 +152,37 @@ async def send_doc(client, message):
             fileid = file.file_id
             total_rename(int(botid), prrename)
             total_size(int(botid), prsize, file.file_size)
-            await message.reply_text(f"""__Wʜᴀᴛ Dᴏ Yᴏᴜ Wᴀɴᴛ Mᴇ Tᴏ Dᴏ Wɪᴛʜ Tʜɪs Fɪʟᴇ ?__\n\n**Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`\n**Fɪʟᴇ Sɪᴢᴇ** :- {filesize}\n**DC ID** :- {dcid}""", reply_to_message_id=message.id, reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("📝 Rᴇɴᴀᴍᴇ", callback_data="rename"),
-                  InlineKeyboardButton("✖️ Cᴀɴᴄᴇʟ", callback_data="cancel")]]))
+
+            await message.reply_text(f"""__Wʜᴀᴛ Dᴏ Yᴏᴜ Wᴀɴᴛ Mᴇ Tᴏ Dᴏ Wɪᴛʜ Tʜɪs Fɪʟᴇ ?__\n\n**Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`\n**Fɪʟᴇ Sɪᴢᴇ** :- {filesize}\n**DC ID** :- {dcid}""", 
+                                        reply_to_message_id=message.id, 
+                                        reply_markup=InlineKeyboardMarkup([
+                                            [InlineKeyboardButton("📝 Rename", callback_data="rename"), InlineKeyboardButton("✖️ Cancel", callback_data="cancel")],
+                                            [InlineKeyboardButton("📥 Download", callback_data=f"download_{fileid}")]
+                                        ]))
+
+@Client.on_callback_query(filters.regex(r"download_(.*)"))
+async def download_file(client, callback_query):
+    file_id = callback_query.data.split("_")[1]
+    user_id = callback_query.from_user.id
+
+    # Fetch messages from link_channel
+    messages = await client.get_chat_history(link_channel)
+    download_link = None
+
+    # Look for the message containing the file_id and extract the download link
+    for msg in messages:
+        if msg.reply_markup and msg.document and msg.document.file_id == file_id:
+            for button_row in msg.reply_markup.inline_keyboard:
+                for button in button_row:
+                    if button.url and "fast_link" in button.url:
+                        download_link = button.url
+                        break
+            if download_link:
+                break
+
+    if download_link:
+        await client.send_message(user_id, f"Download your file from: [Download Link]({download_link})", parse_mode='markdown')
+    else:
+        await client.send_message(user_id, "Failed to find a download link.")
+
+# Rest of your bot code continues here
