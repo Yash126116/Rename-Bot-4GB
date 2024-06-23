@@ -1,6 +1,6 @@
 from helper.progress import progress_for_pyrogram
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboar>
+from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from helper.database import *
@@ -15,7 +15,8 @@ from helper.set import escape_invalid_curly_brackets
 from config import *
 
 log_channel = LOG_CHANNEL
-app = Client("test", api_id=API_ID, api_hash=API_HASH, session_>
+app = Client("test", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
+
 
 @Client.on_callback_query(filters.regex('cancel'))
 async def cancel(bot, update):
@@ -33,7 +34,8 @@ async def rename(bot, update):
     chat_id = update.message.chat.id
     id = update.message.reply_to_message_id
     await update.message.delete()
-    await update.message.reply_text(f"__Please Enter The New Fi>
+    await update.message.reply_text(f"__Please Enter The New Filename...__\n\nNote:- Extension Not Required", reply_to_message_id=id,
+                                    reply_markup=ForceReply(True))
     dateupdate(chat_id, date)
 
 @Client.on_callback_query(filters.regex("doc"))
