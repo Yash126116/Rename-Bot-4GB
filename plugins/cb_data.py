@@ -343,4 +343,3 @@ async def aud(bot, update):
             used_limit(update.from_user.id, neg_used)
             os.remove(file_path)
 
-app.run()
